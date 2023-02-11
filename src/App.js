@@ -1,37 +1,36 @@
-import { useState } from 'react'
+import './App.css';
+import { useRef } from 'react';
 
-function App() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+function App(){
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({
-      email, password,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
     });
   };
-  const handleChangeEmail = (e) => {setEmail(e.target.value);
-  };
-  const handleChangePassword = (e) => {setPassword(e.target.value);
-  };
 
-  return (
-    <div className='App'>
+  return(
+    <div className="App">
       <h1>ログイン</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
-          <input id="email" name="email" value={email} onChange={handleChangeEmail} />
+          <label htmlFor='email'>Email</label>
+          <input id="email" name='email' ref={emailRef} />
         </div>
         <div>
-          <label htmlFor="password">パスワード</label>
-          <input id="password" name="email" value={password} onChange={handleChangePassword} type="password" />
+          <label htmlFor='password'>Password</label>
+          <input id="password" name='password' ref={passwordRef} type="password" />
         </div>
         <div>
           <button type="submit">ログイン</button>
         </div>
       </form>
     </div>
-  );
+  )
 }
 export default App;
